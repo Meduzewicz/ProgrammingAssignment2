@@ -1,8 +1,18 @@
-## Put comments here that give an overall description of what your
-## functions do
+## This file contains two functions to computing inverse of matrix 
+## with cached approach. First function create special matrix object
+## which contains both original matrix and cached inversion of this 
+## matrix. Second one computes an inversion of matrix (requires 
+## matrix object returned by makeCacheMatrix()).
 
-## Write a short comment describing this function
-
+## Take a "normal" R matrix and return "special" matrix able
+## to cache its inverse. 
+## Input:
+##    mat - given matrix()
+##
+## CacheMatrix object (list) consists of 4 functions:
+##    set(), get() - save and restore an original matrix
+##    setInvMat, getInvMat() - save and restore a cached inversed
+##                                                        matrix
 makeCacheMatrix <- function(mat = matrix()) {
   ## inverted matrix not yet computed
   invMat <- NULL
@@ -35,7 +45,11 @@ makeCacheMatrix <- function(mat = matrix()) {
 }
 
 
-## Write a short comment describing this function
+## CacheSolve() is a wrapper for solve() to easy use with CacheMatrix 
+## object. If CacheMatrix has already computed and cached inversed
+## matrix then CacheSolve() use this data instead computing it again.
+## Input:
+##    mat - CacheMatrix object
 
 cacheSolve <- function(mat, ...) {
   ## check whether inversed matrix is computed or not
