@@ -37,6 +37,18 @@ makeCacheMatrix <- function(mat = matrix()) {
 
 ## Write a short comment describing this function
 
-cacheSolve <- function(x, ...) {
-  ## Return a matrix that is the inverse of 'x'
+cacheSolve <- function(mat, ...) {
+  ## check whether inversed matrix is computed or not
+  im <- mat$getInvMat()
+  if(!is.null(im)) {
+    ## inverse is computed so all we need to do is return it
+    return(im)
+  }
+  
+  ## get original matrix and compute its inverse matrix
+  im <- solve(mat$get(), ...)
+  
+  ## cache computed inverted matrix and than return it as a result of function
+  mat$setInvMat(im)
+  im
 }
